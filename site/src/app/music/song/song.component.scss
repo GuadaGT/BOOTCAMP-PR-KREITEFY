@@ -1,0 +1,15 @@
+.card {
+  max-width: 50%;
+.fa-circle-play {
+  font-size: 35px;
+  color: dodgerblue;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+  ngb-rating {
+    color: lightskyblue;
+    font-size: 30px;
+  }
+}

@@ -1,0 +1,25 @@
+.navbar {
+  height: 100px;
+  a {
+    color: whitesmoke;
+  }
+
+  .fa-spotify {
+    color: deepskyblue;
+    font-size: xx-large;
+  }
+
+  span.username {
+    color: deepskyblue;
+    font-weight: bold;
+    margin-right: 20px;
+    font-size: large;
+    cursor: pointer;
+  }
+
+  .fa-circle-user, .fa-user-large-slash {
+    color: whitesmoke;
+    font-size: x-large;
+    cursor: pointer;
+  }
+}

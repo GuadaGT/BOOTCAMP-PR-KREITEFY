@@ -1,0 +1,17 @@
+<nav class="navbar bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <div class="d-inline-block align-text-top">
+        <i class="fa-brands fa-spotify"></i>
+      </div>
+      Kreitefy
+    </a>
+    <div *ngIf="isLoggedIn(); else loggedOutTemplate">
+      <span class="username" [routerLink]="['/profile']" routerLinkActive="active">{{ getAuthService().getUsername() }}</span>
+      <i class="fas fa-user-large-slash" (click)="logOut()"></i>
+    </div>
+    <ng-template #loggedOutTemplate>
+      <i class="far fa-circle-user" [routerLinkActive]="['active']"  [routerLink]="['/login']"></i>
+    </ng-template>
+  </div>
+</nav>

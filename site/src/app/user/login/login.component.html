@@ -1,0 +1,25 @@
+<div class="container py-5 position-absolute top-50 start-50 translate-middle">
+  <div class="row d-flex align-items-center justify-content-center h-100">
+    <div class="col-md-8 col-lg-7 col-xl-6">
+      <img src="assets/images/OIG1.jpeg" alt="Image" class="img-fluid">
+    </div>
+    <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+      <form>
+        <div data-mdb-input-init class="form-outline mb-4">
+          <input [(ngModel)]="credentials.username" name="email" type="email" id="email" class="form-control form-control" placeholder="Username"/>
+        </div>
+        <div data-mdb-input-init class="form-outline mb-4">
+          <input [(ngModel)]="credentials.password" name="password" type="password" id="password" class="form-control form-control" placeholder="Password"/>
+        </div>
+        <div class="d-flex justify-content-around align-items-center mb-4">
+        </div>
+        <div class="d-flex justify-content-around align-items-center mb-4">
+          <button (click)="login()" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-lg btn-block">Iniciar sesión</button>
+        </div>
+      </form>
+      <div class="d-flex justify-content-around align-items-center mb-4 text-success" >
+        <p>If you don't have an account, <a routerLink="/register">register</a></p>
+      </div>
+    </div>
+  </div>
+</div>

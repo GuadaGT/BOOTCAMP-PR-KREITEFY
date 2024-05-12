@@ -1,0 +1,102 @@
+h5 {
+  color: whitesmoke;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.hidden {
+  display: none;
+}
+.form-group {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border-color: skyblue;
+  font-weight: bold;
+}
+
+.fa-filter{
+  cursor: pointer;
+  color: whitesmoke;
+  font-size: x-large;
+  &:hover {
+    color: skyblue;
+    transition: transform 0.3s ease-in-out;
+    transform: scale(1.3);
+  }
+}
+
+.button-container {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  .btn-success {
+    background-color: dodgerblue;
+    margin-left: 10px;
+    &:hover{
+      background-color:  deepskyblue;
+      border-color:  deepskyblue;
+      color: whitesmoke;
+      font-weight: bold;
+    }
+  }
+  .btn-danger{
+    margin-left: 10px;
+    background-color: dimgrey;
+    border-color:dimgrey;
+    &:hover {
+      background-color: black;
+      border-color:black;
+      font-weight: bold;
+    }
+  }
+}
+
+.card {
+  width: 14rem;
+  margin: 5px;
+  cursor: pointer;
+  border: none;
+  img {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+.btn {
+  color: whitesmoke;
+  background-color: dodgerblue;
+  cursor: pointer;
+  font-weight: bold;
+  &:hover {
+    color: whitesmoke;
+    background-color: deepskyblue;
+    transition: transform 0.3s ease-in-out;
+    font-weight: bold;
+  }
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.pagination > li > a
+{
+  background-color: #212529;
+  border: none;
+  color: cornflowerblue;
+  font-weight: bold;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+  color: #212529;
+  background-color: cornflowerblue;
+  border-color: #ddd;
+  font-weight: bold;
+}
+

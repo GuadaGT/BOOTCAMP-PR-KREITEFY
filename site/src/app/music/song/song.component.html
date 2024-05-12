@@ -1,0 +1,18 @@
+<div class="card mb-3 bg-dark text-white"  *ngIf="song">
+  <div class="row g-0">
+    <div class="col-md-4 d-flex justify-content-center align-items-center">
+      <img [src]="song.imageAlbum"  class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8 d-flex justify-content-center align-items-center">
+      <div class="card-body">
+        <h5 class="card-title">{{song.title}}</h5>
+        <p class="card-text">{{song.style}}</p>
+        <p class="card-text">{{song.artistName}}</p>
+        <p class="card-text">{{song.album}}</p>
+        <p class="card-text">{{song.duration}} minutes</p>
+        <ngb-rating [rate]="0" (rateChange)="addRating($event)"></ngb-rating>
+        <i class="fas fa-circle-play" (click)="addReproduction()"></i>
+      </div>
+    </div>
+    </div>
+  </div>

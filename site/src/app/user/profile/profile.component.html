@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card border-info mb-3 bg-dark">
+        <div class="card-header text-center bg-info-subtle">
+          Profile
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="userForm()">
+            <div class="form-group">
+              <label for="userId">Usuario: </label>
+              <span id="userId" class="form-control-static"> {{ user.id }}</span>
+            </div>
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input type="text" class="form-control" id="username" name="username"  [(ngModel)]="user.username" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email" required >
+            </div>
+            <div class="form-group">
+              <label for="firstName">First Name:</label>
+              <input type="text" class="form-control" id="firstName" [(ngModel)]="user.firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name:</label>
+              <input type="text" class="form-control" id="lastName" [(ngModel)]="user.lastName" name="lastName" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="password" class="form-control" id="password" [(ngModel)]="user.password" name="password" required>
+            </div>
+            <div class="d-flex justify-content-around align-items-center mb-4">
+              <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-lg btn-block">Save</button>
+              <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block" [routerLink]="['/home']">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card border-info mb-3 bg-dark">
+        <div class="card-header text-center bg-info-subtle">
+          Record
+        </div>
+        <div class="card-body">
+          <div class="card mb-3 bg-dark">
+            <div class="card-header text-center bg-info-subtle">
+              More listened songs
+            </div>
+            <div class="card-body">
+              <div class="col-md-12" *ngFor="let userSong of userSongsWithFullInfo; let i = index">
+                <div class="row">
+                  <div class="col-md-6">
+                    {{ userSongs[i].reproductionDate | date: 'dd-MM-yyyy HH:mm'}}
+                  </div>
+                  <div class="col-md-6">
+                    {{ userSong.title }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <ul class="pagination">
+            <  <li class="page-item">
+            <a class="page-link" aria-label="Previous" (click)="previousPage()" [class.disabled]="currentPage === 0">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+            <li class="page-item">
+              <a class="page-link" aria-label="Next" (click)="nextPage()" [class.disabled]="currentPage === totalPages - 1">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
