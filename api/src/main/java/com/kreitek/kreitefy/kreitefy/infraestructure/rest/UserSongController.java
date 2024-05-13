@@ -1,24 +1,31 @@
 package com.kreitek.kreitefy.kreitefy.infraestructure.rest;
 
+import com.kreitek.kreitefy.kreitefy.application.dto.ReproductionsDto;
 import com.kreitek.kreitefy.kreitefy.application.dto.UserSongDto;
+import com.kreitek.kreitefy.kreitefy.application.service.ReproductionsService;
 import com.kreitek.kreitefy.kreitefy.application.service.UserSongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping
 public class UserSongController {
 
     private final UserSongService userSongService;
+    private final ReproductionsService reproductionsService;
     private static final Long DEFAULT_RATING = 3L;
 
     @Autowired
-    public UserSongController(UserSongService userSongService) {
+    public UserSongController(UserSongService userSongService, ReproductionsService reproductionsService) {
         this.userSongService = userSongService;
+        this.reproductionsService = reproductionsService;
     }
 
     @PutMapping(value = "/song/{songId}/user/{userId}/reproductions", produces = "application/json")
@@ -39,6 +46,16 @@ public class UserSongController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping(value = "/user/{userId}/reproductions", produces = "application/json")
+    public ResponseEntity<List<ReproductionsDto>> getReproductionsByUser(
+            @PathVariable Long userId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<ReproductionsDto> reproductionsPage = reproductionsService.getReproductionsByUserId(userId,pageable);
+        return new ResponseEntity<>(reproductionsPage.getContent(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/user/{userId}/ratings", produces = "application/json")
