@@ -15,6 +15,7 @@ public class SongSimpleDto implements Serializable {
     private String style;
     private String image;
 
+
     public SongSimpleDto() {
     }
 
