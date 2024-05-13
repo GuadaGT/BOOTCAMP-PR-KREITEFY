@@ -6,6 +6,7 @@ import com.kreitek.kreitefy.kreitefy.application.mapper.UserMapper;
 import com.kreitek.kreitefy.kreitefy.application.mapper.UserSongMapper;
 import com.kreitek.kreitefy.kreitefy.application.service.SongService;
 import com.kreitek.kreitefy.kreitefy.application.service.UserSongService;
+import com.kreitek.kreitefy.kreitefy.domain.entity.Reproductions;
 import com.kreitek.kreitefy.kreitefy.domain.entity.Song;
 import com.kreitek.kreitefy.kreitefy.domain.entity.User;
 import com.kreitek.kreitefy.kreitefy.domain.entity.UserSong;
@@ -20,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserSongServiceImpl implements UserSongService {
@@ -67,7 +67,14 @@ public class UserSongServiceImpl implements UserSongService {
 
             userSongPersistence.saveSongUser(userSongToUpdate);
         }
+        Reproductions reproduction = new Reproductions();
+        reproduction.setSong(songMapper.fromId(songId));
+        reproduction.setUser(userMapper.fromId(userId));
+        reproduction.setReproductionDate(now);
+
+        userSongPersistence.saveReproduction(reproduction);
     }
+
 
     @Override
     @Transactional

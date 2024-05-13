@@ -41,7 +41,7 @@ public class UserSongController {
         }
     }
 
-    @GetMapping(value = "/user/{userId}/ratings", produces = "application/json" )
+    @GetMapping(value = "/user/{userId}/ratings", produces = "application/json")
     public ResponseEntity<Page<UserSongDto>> getUserRatings(@PathVariable Long userId,
                                                             Pageable pageable,
                                                             @RequestParam(defaultValue = "5") int size) {

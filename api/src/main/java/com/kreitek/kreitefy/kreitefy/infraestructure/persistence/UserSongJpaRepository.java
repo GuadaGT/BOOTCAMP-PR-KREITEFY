@@ -16,4 +16,5 @@ public interface UserSongJpaRepository extends JpaRepository<UserSong, Long>, Jp
 
     @Query("SELECT us FROM UserSong us WHERE us.user.id = :userId AND us.rating >= :rating")
     Page<UserSong> findFavoriteSongsByUser(@Param("userId") Long userId, @Param("rating") Long rating, Pageable pageable);
+
 }

@@ -1,4 +1,5 @@
 package com.kreitek.kreitefy.kreitefy.domain.persistence;
+import com.kreitek.kreitefy.kreitefy.domain.entity.Reproductions;
 import com.kreitek.kreitefy.kreitefy.domain.entity.UserSong;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,4 +17,6 @@ public interface UserSongPersistence {
     UserSong addRatingSong(UserSong userSong);
 
     Page<UserSong> getFavoriteSongsByUser(Long userId, Long rating, Pageable pageable, int size);
+
+    void saveReproduction(Reproductions reproduction);
 }

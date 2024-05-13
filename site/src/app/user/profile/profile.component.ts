@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../auth/service/auth.service";
 import {UserService} from "../service/user.service";
 import {MusicService} from "../../music/service/music.service";
-import {SongSimple} from "../../model/SongSimple.inteface";
 import {UserSong} from "../../model/UserSong.interface";
 import {forkJoin} from "rxjs";
 import {Song} from "../../model/Song.interface";
