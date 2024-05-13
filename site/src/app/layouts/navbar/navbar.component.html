@@ -8,7 +8,7 @@
     </a>
     <div *ngIf="isLoggedIn(); else loggedOutTemplate">
       <span class="username" [routerLink]="['/profile']" routerLinkActive="active">{{ getAuthService().getUsername() }}</span>
-      <i class="fas fa-user-large-slash" (click)="logOut()"></i>
+      <i class="fas fa-user-large-slash" (click)="logOut()" ></i>
     </div>
     <ng-template #loggedOutTemplate>
       <i class="far fa-circle-user" [routerLinkActive]="['active']"  [routerLink]="['/login']"></i>

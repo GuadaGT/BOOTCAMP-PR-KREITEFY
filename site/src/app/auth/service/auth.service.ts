@@ -36,7 +36,7 @@ export class AuthService {
   logOut(): Observable<any> {
     return of(localStorage.removeItem('auth_token')).pipe(
       tap(() => {
-        this.toast.success('You have successfully logged out', 'Success');
+        this.toast.info('You have successfully logged out', 'Success');
       }),
       catchError(error => {
           console.error('You haven`t logged out yet', error);

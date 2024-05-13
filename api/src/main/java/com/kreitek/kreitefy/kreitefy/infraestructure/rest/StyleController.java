@@ -46,7 +46,7 @@ public class StyleController {
       }
     }
 
-    @DeleteMapping(value = "/styles/{songId}", produces = "application/json")
+    @DeleteMapping(value = "/styles/{styleId}", produces = "application/json")
     ResponseEntity<Void> deleteStyleById(@PathVariable Long styleId) {
         styleService.deleteStyleById(styleId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

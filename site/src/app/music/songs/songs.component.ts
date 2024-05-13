@@ -1,9 +1,9 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { MusicService } from '../service/music.service';
 import {SongSimple} from "../../model/SongSimple.inteface";
 import {UserSong} from "../../model/UserSong.interface";
 import {AuthService} from "../../auth/service/auth.service";
-import {forkJoin} from "rxjs";
+import {catchError, EMPTY, forkJoin, switchMap} from "rxjs";
 import {Song} from "../../model/Song.interface";
 
 @Component({
@@ -141,43 +141,43 @@ export class SongsComponent implements OnInit {
     if (!username) {
       return;
     }
-    this.authService.getUserIdByUsername(username).subscribe({
-      next: (userId: number) => {
-        this.songService.getFavoriteSongs(userId, this.currentPage, this.pageSize).subscribe({
-          next: (favoriteSongs) => {
-            if (Array.isArray(favoriteSongs.content)) {
-              const observables = favoriteSongs.content.map((userSong: UserSong) => {
-                return this.songService.getSong(userSong.songId);
-              });
-              forkJoin<Song[]>(observables).subscribe((songs: Song[]) => {
-                this.userSongsWithFullInfo = songs.map(song => {
-                  return {
-                    id: song.id,
-                    title: song.title,
-                    imageAlbum: song.imageAlbum,
-                    artistName: song.artistName,
-                    album: song.album,
-                    style: song.style,
-                  };
-                });
-              }, error => {
-                console.error('Error loading song images:', error);
-              });
-            } else {
-              console.error('Not an Array:', favoriteSongs);
-            }
-          },
-          error: (err) => {
+    this.authService.getUserIdByUsername(username).pipe(
+      switchMap((userId: number) => {
+        return this.songService.getFavoriteSongs(userId, this.currentPage, this.pageSize).pipe(
+          catchError((err) => {
             this.handleError(err);
-          }
-        });
-      },
-      error: (err) => {
+            return EMPTY;
+          })
+        );
+      }),
+      catchError((err) => {
         this.handleError(err);
+        return EMPTY;
+      })
+    ).subscribe((favoriteSongs) => {
+      if (Array.isArray(favoriteSongs.content)) {
+        const observables = favoriteSongs.content.map((userSong: UserSong) => {
+          return this.songService.getSong(userSong.songId);
+        });
+        forkJoin<Song[]>(observables).subscribe((songs: Song[]) => {
+          this.userSongsWithFullInfo = songs.map(song => {
+            return {
+              id: song.id,
+              title: song.title,
+              imageAlbum: song.imageAlbum,
+              artistName: song.artistName,
+              album: song.album,
+              style: song.style,
+            };
+          });
+        }, error => {
+          console.error('Error loading song images:', error);
+        });
+      } else {
+        console.error('Not an Array:', favoriteSongs);
       }
     });
   }
-
 
   toggleShowAllSongs(): void {
     this.showAllSongs = !this.showAllSongs;

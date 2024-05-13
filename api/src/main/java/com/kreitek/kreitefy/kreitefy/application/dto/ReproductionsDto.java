@@ -1,7 +1,7 @@
 package com.kreitek.kreitefy.kreitefy.application.dto;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class ReproductionsDto implements Serializable {
@@ -9,7 +9,7 @@ public class ReproductionsDto implements Serializable {
     private Long id;
     private Long userId;
     private Long songId;
-    private LocalDate reproductionDate;
+    private LocalDateTime reproductionDate;
 
     public ReproductionsDto() {
     }
@@ -38,11 +38,11 @@ public class ReproductionsDto implements Serializable {
         this.songId = songId;
     }
 
-    public LocalDate getReproductionDate() {
+    public LocalDateTime getReproductionDate() {
         return reproductionDate;
     }
 
-    public void setReproductionDate(LocalDate reproductionDate) {
+    public void setReproductionDate(LocalDateTime reproductionDate) {
         this.reproductionDate = reproductionDate;
     }
 

@@ -22,21 +22,6 @@ public class SongDto implements Serializable {
 
     public SongDto() {}
 
-    public SongDto(Long id, String title, String imageAlbum, Date date, Float duration, Long rating, Long reproductions, Long artistId, String artistName, Long albumId, String album, Long styleId, String style) {
-        this.id = id;
-        this.title = title;
-        this.imageAlbum = imageAlbum;
-        this.date = date;
-        this.duration = duration;
-        this.rating = rating;
-        this.reproductions = reproductions;
-        this.artistId = artistId;
-        this.artistName = artistName;
-        this.albumId = albumId;
-        this.album = album;
-        this.styleId = styleId;
-        this.style = style;
-    }
 
     public Long getId() {
         return id;

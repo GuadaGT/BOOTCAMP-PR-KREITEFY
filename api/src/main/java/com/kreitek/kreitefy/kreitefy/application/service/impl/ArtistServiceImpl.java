@@ -4,7 +4,6 @@ import com.kreitek.kreitefy.kreitefy.application.dto.ArtistDto;
 import com.kreitek.kreitefy.kreitefy.application.mapper.ArtistMapper;
 import com.kreitek.kreitefy.kreitefy.application.service.ArtistService;
 import com.kreitek.kreitefy.kreitefy.domain.entity.Artist;
-import com.kreitek.kreitefy.kreitefy.domain.entity.Song;
 import com.kreitek.kreitefy.kreitefy.domain.persistence.ArtistPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

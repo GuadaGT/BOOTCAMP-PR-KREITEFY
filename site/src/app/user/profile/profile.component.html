@@ -51,13 +51,13 @@
               More listened songs
             </div>
             <div class="card-body">
-              <div class="col-md-12" *ngFor="let userSong of userSongs; let i = index">
+              <div class="col-md-12" *ngFor="let userSong of userSongsWithFullInfo; let i = index">
                 <div class="row">
                   <div class="col-md-6">
                     {{ userSong.reproductionDate | date: 'dd-MM-yyyy HH:mm'}}
                   </div>
                   <div class="col-md-6">
-                    {{ userSongsWithFullInfo[i].title }}
+                    {{ userSong.title }}
                   </div>
                 </div>
               </div>
@@ -66,7 +66,7 @@
         </div>
         <div class="card-footer">
           <ul class="pagination">
-            <  <li class="page-item">
+            <li class="page-item">
             <a class="page-link" aria-label="Previous" (click)="previousPage()" [class.disabled]="currentPage === 0">
               <span aria-hidden="true">&laquo;</span>
             </a>

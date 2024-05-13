@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from "../../auth/service/auth.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
@@ -8,7 +8,7 @@ import {ToastrService} from "ngx-toastr";
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -18,7 +18,6 @@ export class NavbarComponent implements OnInit {
     return this.authService;
   }
 
-  ngOnInit(): void {}
 
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
@@ -28,7 +27,6 @@ export class NavbarComponent implements OnInit {
     this.authService.logOut().subscribe({
       next: value => {
         this.authService.logOut();
-        this.toast.error('Log out', 'Success')
         this.router.navigate(['/home']);
       },
       error:(err)=>{

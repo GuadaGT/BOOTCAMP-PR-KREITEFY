@@ -11,4 +11,5 @@ export interface Song {
   album?: string;
   styleId?: number;
   style?: string;
+  reproductionDate?: Date;
 }

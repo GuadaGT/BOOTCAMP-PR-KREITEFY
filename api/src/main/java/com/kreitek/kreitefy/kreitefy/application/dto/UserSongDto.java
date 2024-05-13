@@ -1,7 +1,5 @@
 package com.kreitek.kreitefy.kreitefy.application.dto;
 
-import com.kreitek.kreitefy.kreitefy.domain.entity.associative.UserSongAssociative;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -10,7 +8,7 @@ public class UserSongDto implements Serializable {
 
     private Long songId;
     private Long userId;
-    private Long reproductions;
+    private Long reproductions; //mantenemos
     private Long rating;
     private LocalDateTime reproductionDate;
 
@@ -77,7 +75,6 @@ public class UserSongDto implements Serializable {
                 ", userId=" + userId +
                 ", reproductions=" + reproductions +
                 ", rating=" + rating +
-                ", reproductionDate=" + reproductionDate +
                 '}';
     }
 }

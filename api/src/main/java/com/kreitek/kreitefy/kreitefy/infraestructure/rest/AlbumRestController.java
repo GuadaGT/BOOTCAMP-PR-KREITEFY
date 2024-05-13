@@ -1,7 +1,6 @@
 package com.kreitek.kreitefy.kreitefy.infraestructure.rest;
 
 import com.kreitek.kreitefy.kreitefy.application.dto.AlbumDto;
-import com.kreitek.kreitefy.kreitefy.application.dto.ArtistDto;
 import com.kreitek.kreitefy.kreitefy.application.service.AlbumService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

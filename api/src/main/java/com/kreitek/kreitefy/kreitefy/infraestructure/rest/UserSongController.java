@@ -6,7 +6,6 @@ import com.kreitek.kreitefy.kreitefy.application.service.ReproductionsService;
 import com.kreitek.kreitefy.kreitefy.application.service.UserSongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +37,17 @@ public class UserSongController {
         }
     }
 
+    @GetMapping(value = "/user/{userId}/reproductions/count", produces = "application/json")
+    public ResponseEntity<Long> getReproductionsCountByUser(@PathVariable Long userId) {
+        try {
+            Long count = reproductionsService.getReproductionsCountByUserId(userId);
+            return ResponseEntity.ok(count);
+        } catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     @PutMapping(value = "/song/{songId}/user/{userId}/rating", produces = "application/json")
     public ResponseEntity<UserSongDto> addRating(@PathVariable Long songId, @PathVariable Long userId, @RequestParam("rating") Long rating) {
         try {
@@ -49,12 +59,8 @@ public class UserSongController {
     }
 
     @GetMapping(value = "/user/{userId}/reproductions", produces = "application/json")
-    public ResponseEntity<List<ReproductionsDto>> getReproductionsByUser(
-            @PathVariable Long userId,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<ReproductionsDto> reproductionsPage = reproductionsService.getReproductionsByUserId(userId,pageable);
+    public ResponseEntity<List<ReproductionsDto>> getReproductionsByUser(@PathVariable Long userId, Pageable pageable){
+        Page<ReproductionsDto> reproductionsPage = reproductionsService.getReproductionsByUserId(pageable, userId);
         return new ResponseEntity<>(reproductionsPage.getContent(), HttpStatus.OK);
     }
 

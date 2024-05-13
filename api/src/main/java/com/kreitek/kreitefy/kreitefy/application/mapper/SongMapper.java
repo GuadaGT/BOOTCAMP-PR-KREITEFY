@@ -3,7 +3,6 @@ package com.kreitek.kreitefy.kreitefy.application.mapper;
 import com.kreitek.kreitefy.kreitefy.application.dto.SongDto;
 import com.kreitek.kreitefy.kreitefy.domain.entity.Artist;
 import com.kreitek.kreitefy.kreitefy.domain.entity.Song;
-import com.kreitek.kreitefy.kreitefy.domain.entity.Style;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;

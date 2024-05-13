@@ -5,6 +5,7 @@ import {AuthService} from "../../auth/service/auth.service";
 import {SongSimple} from "../../model/SongSimple.inteface";
 import {Song} from "../../model/Song.interface";
 import {UserSong} from "../../model/UserSong.interface";
+import {Reproductions} from "../../model/Reproductions.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -124,6 +125,30 @@ export class MusicService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get(favoritesSongsUri, { headers }).pipe(
       catchError(error => throwError(error))
+    );
+  }
+
+  getReproductionsCount(userId: number): Observable<number> {
+    const reproductionsCountUrl = `${this.baseUrl}user/${userId}/reproductions/count`;
+    const token = this.getToken();
+    if (!token) {
+      return throwError('User not authenticated');
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<number>(reproductionsCountUrl, { headers }).pipe(
+      catchError(error => throwError('Error retrieving reproductions count'))
+    );
+  }
+
+  getReproductions(userId: number, page: number, size: number): Observable<Reproductions[]> {
+    const reproductionsUrl = `${this.baseUrl}user/${userId}/reproductions?page=${page}&size=${size}`;
+    const token = this.getToken();
+    if (!token) {
+      return throwError('User not authenticated');
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Reproductions[]>(reproductionsUrl, { headers }).pipe(
+      catchError(error => throwError('Error retrieving reproductions'))
     );
   }
 }

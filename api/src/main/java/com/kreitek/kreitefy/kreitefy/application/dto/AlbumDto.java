@@ -12,6 +12,7 @@ public class AlbumDto implements Serializable {
     public AlbumDto() {
     }
 
+
     public Long getId() {
         return id;
     }

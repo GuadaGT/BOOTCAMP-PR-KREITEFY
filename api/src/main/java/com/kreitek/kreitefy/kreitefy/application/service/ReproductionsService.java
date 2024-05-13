@@ -6,5 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface ReproductionsService {
 
-    Page<ReproductionsDto> getReproductionsByUserId(Long userId, Pageable pageable);
+    Page<ReproductionsDto> getReproductionsByUserId(Pageable pageable, Long userId);
+
+    Long getReproductionsCountByUserId(Long userId);
 }
