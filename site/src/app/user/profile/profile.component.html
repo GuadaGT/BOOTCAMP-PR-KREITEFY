@@ -51,13 +51,13 @@
               More listened songs
             </div>
             <div class="card-body">
-              <div class="col-md-12" *ngFor="let userSong of userSongsWithFullInfo; let i = index">
+              <div class="col-md-12" *ngFor="let userSong of userSongs; let i = index">
                 <div class="row">
                   <div class="col-md-6">
-                    {{ userSongs[i].reproductionDate | date: 'dd-MM-yyyy HH:mm'}}
+                    {{ userSong.reproductionDate | date: 'dd-MM-yyyy HH:mm'}}
                   </div>
                   <div class="col-md-6">
-                    {{ userSong.title }}
+                    {{ userSongsWithFullInfo[i].title }}
                   </div>
                 </div>
               </div>

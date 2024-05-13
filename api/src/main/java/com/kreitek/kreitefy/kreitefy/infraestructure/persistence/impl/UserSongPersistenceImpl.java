@@ -5,7 +5,6 @@ import com.kreitek.kreitefy.kreitefy.domain.persistence.UserSongPersistence;
 import com.kreitek.kreitefy.kreitefy.infraestructure.persistence.UserSongJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 

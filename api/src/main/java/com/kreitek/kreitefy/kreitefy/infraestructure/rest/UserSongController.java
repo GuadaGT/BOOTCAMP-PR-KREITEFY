@@ -2,6 +2,7 @@ package com.kreitek.kreitefy.kreitefy.infraestructure.rest;
 
 import com.kreitek.kreitefy.kreitefy.application.dto.UserSongDto;
 import com.kreitek.kreitefy.kreitefy.application.service.UserSongService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -13,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 public class UserSongController {
 
     private final UserSongService userSongService;
-
     private static final Long DEFAULT_RATING = 3L;
 
+    @Autowired
     public UserSongController(UserSongService userSongService) {
         this.userSongService = userSongService;
     }

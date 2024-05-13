@@ -133,17 +133,6 @@ export class ProfileComponent implements OnInit{
     console.log(this.currentPage);
   }
 
-  goToPage(pageNumber: number): void {
-    if (pageNumber >= 0 && pageNumber < this.totalPages) {
-      this.currentPage = pageNumber;
-      this.moreListenedByUser();
-    }
-  }
-
-  getPageNumbers(): number[] {
-    return Array.from({ length: this.totalPages }, (_, i) => i);
-  }
-
   private calculateTotalPages(): void {
     this.totalPages = Math.ceil(this.totalElements / this.pageSize);
   }
