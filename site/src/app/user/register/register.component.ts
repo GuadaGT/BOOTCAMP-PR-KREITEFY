@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AuthService} from "../../auth/service/auth.service";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,11 @@ export class RegisterComponent {
               private router: Router,
               private toast: ToastrService) { }
 
-  register(): void {
+  register(userForm: NgForm): void {
+    if (userForm.invalid) {
+      this.toast.error('Invalid Form!');
+      return;
+    }
     this.authService.register(this.user).subscribe({
       next: (response) => {
         this.authService.saveToken(response.token);
