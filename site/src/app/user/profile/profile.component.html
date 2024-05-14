@@ -8,28 +8,33 @@
         <div class="card-body">
           <form (ngSubmit)="userForm()">
             <div class="form-group">
-              <label for="userId">Usuario: </label>
+              <label for="userId"><strong>User: </strong> </label>
               <span id="userId" class="form-control-static"> {{ user.id }}</span>
             </div>
             <div class="form-group">
-              <label for="username">Username:</label>
+              <label for="username"><strong>Username:</strong></label>
               <input type="text" class="form-control" id="username" name="username"  [(ngModel)]="user.username" required>
             </div>
             <div class="form-group">
-              <label for="email">Email:</label>
+              <label for="email"><strong>Email:</strong></label>
               <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email" required >
             </div>
             <div class="form-group">
-              <label for="firstName">First Name:</label>
+              <label for="firstName"><strong>First Name:</strong></label>
               <input type="text" class="form-control" id="firstName" [(ngModel)]="user.firstName" name="firstName" required>
             </div>
             <div class="form-group">
-              <label for="lastName">Last Name:</label>
+              <label for="lastName"><strong>Last Name:</strong></label>
               <input type="text" class="form-control" id="lastName" [(ngModel)]="user.lastName" name="lastName" required>
             </div>
             <div class="form-group">
-              <label for="password">Password:</label>
-              <input type="password" class="form-control" id="password" [(ngModel)]="user.password" name="password" required>
+              <label for="newPassword"><strong>Password:</strong></label>
+              <input type="password" class="form-control" id="newPassword" [(ngModel)]="user.password" name="newPassword" required>
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword"><strong>Confirm Password:</strong></label>
+              <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="user.confirmPassword" name="confirmPassword" required>
+              <div *ngIf="passwordsMatchError" class="text-danger">Not the same password.</div>
             </div>
             <div class="d-flex justify-content-around align-items-center mb-4">
               <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-lg btn-block">Save</button>
@@ -54,10 +59,10 @@
               <div class="col-md-12" *ngFor="let userSong of userSongsWithFullInfo; let i = index">
                 <div class="row">
                   <div class="col-md-6">
-                    {{ userSong.reproductionDate | date: 'dd-MM-yyyy HH:mm'}}
+                    <strong>{{ userSong.reproductionDate | date: 'dd-MM-yyyy HH:mm'}}</strong>
                   </div>
                   <div class="col-md-6">
-                    {{ userSong.title }}
+                    <strong>{{ userSong.title }}</strong>
                   </div>
                 </div>
               </div>

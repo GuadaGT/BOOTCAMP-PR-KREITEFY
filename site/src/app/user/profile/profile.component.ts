@@ -22,6 +22,10 @@ export class ProfileComponent implements OnInit{
     password: ''
   };
 
+  newPassword: string = '';
+  confirmPassword: string = ''
+  passwordsMatchError: boolean = false;
+
   currentPage: number = 0;
   pageSize: number = 5;
   totalElements: number = 0;
@@ -40,7 +44,8 @@ export class ProfileComponent implements OnInit{
           this.userId = userId;
           this.userService.getUserById(this.userId!).subscribe(
             (user: any) => {
-              this.user = user;
+              const { password, ...userDataWithoutPassword } = user;
+              this.user = userDataWithoutPassword;
               this.pageSize = 5;
               this.moreListenedByUser();
             },
@@ -57,14 +62,24 @@ export class ProfileComponent implements OnInit{
   }
 
   userForm(): void {
+    if (this.newPassword !== this.confirmPassword) {
+      this.passwordsMatchError = true;
+        return;
+
+    }
+
+    this.passwordsMatchError = false;
     this.userService.updateUser(this.user).subscribe(
       (response: any) => {
         console.log('User updated successfully:', response);
       },
       (error: any) => {
         console.error('Error updating user:', error);
+        console.log(this.user.password);
+        console.log(this.confirmPassword);
       }
     );
+
   }
 
   moreListenedByUser(): void {
