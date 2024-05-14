@@ -50,6 +50,7 @@ export class SongsComponent implements OnInit {
     this.currentPage = 0;
     if (!this.showAllSongs && !this.showPopularSongs) {
       this.getRecentSongs();
+      this.getPopularSongs();
     } else if (this.showAllSongs) {
       this.getAllSongs();
     } else {
