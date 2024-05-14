@@ -6,7 +6,7 @@
           Profile
         </div>
         <div class="card-body">
-          <form (ngSubmit)="userForm()">
+          <form (ngSubmit)="userForm()" >
             <div class="form-group">
               <label for="userId"><strong>User: </strong> </label>
               <span id="userId" class="form-control-static"> {{ user.id }}</span>
@@ -33,11 +33,11 @@
             </div>
             <div class="form-group">
               <label for="confirmPassword"><strong>Confirm Password:</strong></label>
-              <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="user.confirmPassword" name="confirmPassword" required>
-              <div *ngIf="passwordsMatchError" class="text-danger">Not the same password.</div>
+              <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="user.confirmPassword" name="confirmPassword" required (ngModelChange)="checkPasswords()">
+              <div *ngIf="passwordsMatchError" class="text-danger"><strong>Review your password</strong></div>
             </div>
             <div class="d-flex justify-content-around align-items-center mb-4">
-              <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-lg btn-block">Save</button>
+              <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-lg btn-block" [disabled]="!areAllFieldsFilled() || passwordsMatchError">Save</button>
               <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-lg btn-block" [routerLink]="['/home']">Cancel</button>
             </div>
           </form>

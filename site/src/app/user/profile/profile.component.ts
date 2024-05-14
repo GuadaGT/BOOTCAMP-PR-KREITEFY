@@ -3,7 +3,9 @@ import {AuthService} from "../../auth/service/auth.service";
 import {UserService} from "../service/user.service";
 import {MusicService} from "../../music/service/music.service";
 import {catchError, EMPTY, forkJoin, switchMap, tap} from "rxjs";
+import { HttpErrorResponse } from "@angular/common/http";
 import {Song} from "../../model/Song.interface";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-profile',
@@ -21,9 +23,8 @@ export class ProfileComponent implements OnInit{
     lastName: '',
     password: ''
   };
-
   newPassword: string = '';
-  confirmPassword: string = ''
+  confirmPassword: string = '';
   passwordsMatchError: boolean = false;
 
   currentPage: number = 0;
@@ -34,7 +35,8 @@ export class ProfileComponent implements OnInit{
 
   constructor(private authService: AuthService,
               private userService: UserService,
-              private songService: MusicService) { }
+              private songService: MusicService,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.username = this.authService.getUsername();
@@ -50,36 +52,45 @@ export class ProfileComponent implements OnInit{
               this.moreListenedByUser();
             },
             (error: any) => {
-              console.error('Error retrieving user details:', error);
+              this.toastr.error('Error while updating user');
             }
           );
         },
         (error: any) => {
-          console.error('Error retrieving user ID:', error);
+          this.toastr.error('Error retrieving user ID');
         }
       );
     }
+  }
+
+  checkPasswords() {
+    this.passwordsMatchError = this.user.password !== this.user.confirmPassword;
+  }
+
+  areAllFieldsFilled(): boolean {
+    return this.user.username && this.user.email && this.user.firstName && this.user.lastName && this.user.password && this.user.confirmPassword;
   }
 
   userForm(): void {
     if (this.newPassword !== this.confirmPassword) {
       this.passwordsMatchError = true;
         return;
-
     }
-
     this.passwordsMatchError = false;
-    this.userService.updateUser(this.user).subscribe(
-      (response: any) => {
-        console.log('User updated successfully:', response);
-      },
-      (error: any) => {
-        console.error('Error updating user:', error);
-        console.log(this.user.password);
-        console.log(this.confirmPassword);
-      }
-    );
-
+    if (this.areAllFieldsFilled()) {
+      this.userService.updateUser(this.user).subscribe(
+        (response: any) => {
+          this.toastr.success('User updated successfully');
+          console.log('User updated successfully:', response);
+        },
+        (error: HttpErrorResponse) => {
+          console.error('Error updating user:', error);
+          this.toastr.error('Error updating user: ' + error.statusText);
+        }
+      );
+    } else {
+      console.error('Not all fields are filled');
+    }
   }
 
   moreListenedByUser(): void {
