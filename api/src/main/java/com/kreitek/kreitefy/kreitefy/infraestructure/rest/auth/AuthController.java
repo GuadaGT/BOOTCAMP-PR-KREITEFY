@@ -9,6 +9,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import static com.kreitek.kreitefy.kreitefy.infraestructure.utils.ValidationUtils.isValidEmail;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -36,6 +38,22 @@ public class AuthController {
 
     @PostMapping(value = "/register")
     public ResponseEntity<AuthResponse> register(@RequestBody UserSimpleDto userSimpleDto) {
+        if (userSimpleDto.getUsername() == null || userSimpleDto.getUsername().isEmpty()) {
+            return ResponseEntity.badRequest().body(new AuthResponse(null,"Username is required."));
+        }
+        if (userSimpleDto.getFirstName() == null || userSimpleDto.getFirstName().isEmpty()) {
+            return ResponseEntity.badRequest().body(new AuthResponse(null,"First name is required."));
+        }
+        if (userSimpleDto.getLastName() == null || userSimpleDto.getLastName().isEmpty()) {
+            return ResponseEntity.badRequest().body(new AuthResponse(null,"Last name is required."));
+        }
+        if (userSimpleDto.getPassword() == null || userSimpleDto.getPassword().isEmpty()) {
+            return ResponseEntity.badRequest().body(new AuthResponse(null,"Password is required."));
+        }
+        if (userSimpleDto.getEmail() == null || !isValidEmail(userSimpleDto.getEmail())) {
+            return ResponseEntity.badRequest().body(new AuthResponse(null,"Invalid email format."));
+        }
+
         userSimpleDto.setPassword(passwordEncoder.encode(userSimpleDto.getPassword()));
         UserSimpleDto userDtoRegistered = authService.register(userSimpleDto);
         String token = jwtService.generateToken(userDtoRegistered);

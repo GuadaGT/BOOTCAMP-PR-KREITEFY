@@ -8,7 +8,7 @@ public class UserSongDto implements Serializable {
 
     private Long songId;
     private Long userId;
-    private Long reproductions; //mantenemos
+    private Long reproductions;
     private Long rating;
     private LocalDateTime reproductionDate;
 
