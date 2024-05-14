@@ -19,3 +19,7 @@ spring:
     console:
       enabled: true
       path: /console
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:db/script.sql
