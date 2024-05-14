@@ -1,0 +1,4 @@
+2024-05-14 08:37:44.481543+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "STYLES" ya existe
+Table "STYLES" already exists; SQL statement:
+CREATE TABLE styles ( id BIGINT PRIMARY KEY, style VARCHAR(30) NOT NULL ) [42101-224]
